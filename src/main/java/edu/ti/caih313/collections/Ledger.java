@@ -1,3 +1,5 @@
+package edu.ti.caih313.collections;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -5,6 +7,7 @@ public class Ledger
 {
     private List<Double> sales = new ArrayList<Double>();
     private int numberOfSales = 0;
+    private double totalSales;
 
     public void addSale(double value)
     {
@@ -12,6 +15,7 @@ public class Ledger
         {
             sales.add(value);
             numberOfSales++;
+            totalSales += value;
         }
         else
         {
@@ -24,24 +28,7 @@ public class Ledger
         return numberOfSales;
     }
 
-    public double getTotalSales()
-    {
-        double total;
-        if (sales.size() == 0)
-        {
-            System.out.println("No sales recorded.");
-            total = 0;
-        }
-        else
-        {
-            total = sales.get(0);
-            for (int i = 1; i < sales.size(); i++)
-            {
-                total += sales.get(i);
-            }
-        }
-        return total;
-    }
+    public double getTotalSales() { return totalSales; }
 
     public double getAverageSale()
     {
@@ -53,8 +40,7 @@ public class Ledger
         }
         else
         {
-            double total = getTotalSales();
-            average = total/sales.size();
+            average = totalSales/sales.size();
         }
         return average;
     }
@@ -70,5 +56,10 @@ public class Ledger
             }
         }
         return numberOfSalesAboveValue;
+    }
+
+    public double getSale(int index)
+    {
+        return (double)sales.get(index);
     }
 }
